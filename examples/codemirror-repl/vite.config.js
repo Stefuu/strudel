@@ -10,6 +10,14 @@ export default defineConfig({
   build: {
     commonjsOptions: {
       include: [/node_modules/],
+    },
+    rollupOptions: {
+      external: ['/doc.json'],
+      output: {
+        globals: {
+          '/doc.json': 'doc'
+        }
+      }
     }
   },
   publicDir: 'public'

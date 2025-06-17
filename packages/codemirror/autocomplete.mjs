@@ -1,4 +1,4 @@
-import jsdoc from '/doc.json';
+const jsdoc = await fetch('/doc.json').then((r) => r.json());
 // import { javascriptLanguage } from '@codemirror/lang-javascript';
 import { autocompletion } from '@codemirror/autocomplete';
 import { h } from './html';
