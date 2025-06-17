@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install && pnpm --filter @strudel/website run build",
+  "buildCommand": "pnpm install && cd website && pnpm install && pnpm run build",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "framework": "astro",
