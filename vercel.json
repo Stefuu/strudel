@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install && pnpm run prebuild && cd website && pnpm run build",
+  "buildCommand": "cd ../.. && pnpm install && pnpm run prebuild && cd website && pnpm run build",
   "outputDirectory": "website/dist",
   "installCommand": "pnpm install",
   "framework": "astro",
