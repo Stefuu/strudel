@@ -1,6 +1,6 @@
 {
   "buildCommand": "pnpm install && pnpm --filter @strudel/website run build",
-  "outputDirectory": "website/dist",
+  "outputDirectory": "website/public",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "astro",
   "git": {
