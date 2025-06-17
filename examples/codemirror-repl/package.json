@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "mkdir -p public && cp ../../doc.json public/",
+    "prebuild": "cd ../.. && pnpm run jsdoc-json && cd examples/codemirror-repl && mkdir -p public && cp ../../doc.json public/",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
