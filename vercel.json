@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm install --yes && cd website && pnpm install --yes && pnpm run build",
+  "buildCommand": "pnpm install --unsafe-perm && cd website && pnpm install --unsafe-perm && pnpm run build",
   "outputDirectory": "dist",
-  "installCommand": "pnpm install --yes",
+  "installCommand": "pnpm install --unsafe-perm",
   "framework": "astro",
   "git": {
     "deploymentEnabled": {
