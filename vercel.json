@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm install && pnpm approve-builds && cd website && pnpm install && pnpm run build",
+  "buildCommand": "pnpm install --yes && cd website && pnpm install --yes && pnpm run build",
   "outputDirectory": "dist",
-  "installCommand": "pnpm install",
+  "installCommand": "pnpm install --yes",
   "framework": "astro",
   "git": {
     "deploymentEnabled": {
