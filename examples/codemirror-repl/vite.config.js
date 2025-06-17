@@ -20,5 +20,21 @@ export default defineConfig({
       }
     }
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  plugins: [
+    {
+      name: 'audioworklet',
+      resolveId(id) {
+        if (id.endsWith('?audioworklet')) {
+          return id;
+        }
+      },
+      load(id) {
+        if (id.endsWith('?audioworklet')) {
+          const realId = id.slice(0, -13);
+          return `export default new URL('${realId}', import.meta.url).href;`;
+        }
+      }
+    }
+  ]
 }); 
