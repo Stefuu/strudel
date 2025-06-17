@@ -1,7 +1,7 @@
 {
-  "buildCommand": "pnpm install && pnpm run build",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": "website/dist",
-  "installCommand": "pnpm install",
+  "installCommand": "npm install",
   "framework": "astro",
   "git": {
     "deploymentEnabled": {
