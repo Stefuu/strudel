@@ -1,4 +1,11 @@
-const jsdoc = await fetch('/doc.json').then((r) => r.json());
+let jsdocCache = null;
+async function getJsDoc() {
+  if (!jsdocCache) {
+    jsdocCache = await fetch('/doc.json').then((r) => r.json());
+  }
+  return jsdocCache;
+}
+
 // import { javascriptLanguage } from '@codemirror/lang-javascript';
 import { autocompletion } from '@codemirror/autocomplete';
 import { h } from './html';
@@ -44,33 +51,30 @@ onMouseDown={(e) => {
 */
 }
 
-const jsdocCompletions = jsdoc.docs
-  .filter(
-    (doc) =>
-      getDocLabel(doc) &&
-      !getDocLabel(doc).startsWith('_') &&
-      !['package'].includes(doc.kind) &&
-      !['superdirtOnly', 'noAutocomplete'].some((tag) => doc.tags?.find((t) => t.originalTitle === tag)),
-  )
-  // https://codemirror.net/docs/ref/#autocomplete.Completion
-  .map((doc) /*: Completion */ => ({
-    label: getDocLabel(doc),
-    // detail: 'xxx', // An optional short piece of information to show (with a different style) after the label.
-    info: () => Autocomplete({ doc }),
-    type: 'function', // https://codemirror.net/docs/ref/#autocomplete.Completion.type
-  }));
+const jsdocCompletions = async (context /* : CompletionContext */) => {
+  const jsdoc = await getJsDoc();
+  return jsdoc.docs
+    .filter(
+      (doc) =>
+        getDocLabel(doc) &&
+        !getDocLabel(doc).startsWith('_') &&
+        !['package'].includes(doc.kind) &&
+        !['superdirtOnly', 'noAutocomplete'].some((tag) => doc.tags?.find((t) => t.originalTitle === tag)),
+    )
+    .map((doc) /*: Completion */ => ({
+      label: getDocLabel(doc),
+      info: () => Autocomplete({ doc }),
+      type: 'function',
+    }));
+};
 
-export const strudelAutocomplete = (context /* : CompletionContext */) => {
+export const strudelAutocomplete = async (context /* : CompletionContext */) => {
   let word = context.matchBefore(/\w*/);
   if (word.from == word.to && !context.explicit) return null;
+  const options = await jsdocCompletions(context);
   return {
     from: word.from,
-    options: jsdocCompletions,
-    /*     options: [
-      { label: 'match', type: 'keyword' },
-      { label: 'hello', type: 'variable', info: '(World)' },
-      { label: 'magic', type: 'text', apply: '⠁⭒*.✩.*⭒⠁', detail: 'macro' },
-    ], */
+    options,
   };
 };
 
