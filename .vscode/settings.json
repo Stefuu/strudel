@@ -4,7 +4,12 @@
         "vals"
     ],
     "yaml.schemas": {
-      "https://json.schemastore.org/github-workflow.json": "file:///home/felix/projects/strudel/.github/workflows/deploy.yml"
+      "https://serverlessworkflow.io/schemas/0.8/workflow.json": [
+        "**/*.sw.yml",
+        "**/*.sw.yaml"
+      ],
+      "https://json.schemastore.org/github-workflow.json": "file:///home/felix/projects/strudel/.github/workflows/deploy.yml",
+      "https://www.artillery.io/schema.json": []
     },
     "testing.automaticallyOpenPeekView": "never"
 }
